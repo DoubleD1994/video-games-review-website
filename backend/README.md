@@ -18,7 +18,9 @@ The server runs on port 3000.
 
 These are the routes:
 
-- http://localhost:3000/ - homepage
+- http://localhost:3000/ - (GET) - homepage
+- http://localhost:3000/register - (POST) - register a new user
+- http://localhost:3000/login - (POST) - authorise a user
 
 A mongo database is being used to store the data. It has the following collections:
 
