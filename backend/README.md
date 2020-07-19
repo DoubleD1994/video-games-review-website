@@ -21,6 +21,7 @@ These are the routes:
 - http://localhost:3000/ - (GET) - homepage
 - http://localhost:3000/register - (POST) - register a new user
 - http://localhost:3000/login - (POST) - authorise a user
+- http://localhost:3000/reviews - (GET, POST) - get and create game reviews
 
 A mongo database is being used to store the data. It has the following collections:
 

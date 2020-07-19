@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import jsonwebtoken from "jsonwebtoken";
 import userRoutes from "./src/routes/userRoutes.js";
+import gameReviewRoutes from "./src/routes/gameReviewRoutes";
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.use((req, res, next) => {
 });
 
 userRoutes(app);
+gameReviewRoutes(app);
 
 app.get("/", (request, response) => {
   response.send("Hello Express :)");
