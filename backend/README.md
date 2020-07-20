@@ -22,10 +22,20 @@ These are the routes:
 - http://localhost:3000/register - (POST) - register a new user
 - http://localhost:3000/login - (POST) - authorise a user
 - http://localhost:3000/reviews - (GET, POST) - get and create game reviews
+- http://localhost:3000/reviews/:reviewTitle - (GET, PUT, DELETE) - get, update and delete a game review
 
 A mongo database is being used to store the data. It has the following collections:
 
 - Coming soon
+
+### The Database
+
+This application is using a MongoDB instance to persist the data.
+
+A unique index has been created for the following:
+
+- users collection username and email
+- gamereviews collection reviewTitle
 
 ### Testing
 
