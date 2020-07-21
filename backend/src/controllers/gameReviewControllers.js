@@ -63,3 +63,25 @@ export const deleteGameReview = (req, res) => {
     }
   );
 };
+
+export const searchForGameReview = (req, res) => {
+  GameReview.find(
+    {
+      $and: [
+        { author: { $regex: req.body.author } },
+        { reviewTitle: { $regex: req.body.reviewTitle } },
+        { gameTitle: { $regex: req.body.gameTitle } },
+        { gameCategories: { $regex: req.body.gameCategories } },
+      ],
+    },
+    (err, gameReview) => {
+      if (err) {
+        res.send({ success: "false", err });
+      }
+      res.json({
+        success: "true",
+        gameReview,
+      });
+    }
+  );
+};

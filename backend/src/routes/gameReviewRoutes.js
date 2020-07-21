@@ -4,6 +4,7 @@ import {
   getSingleGameReview,
   updateGameReview,
   deleteGameReview,
+  searchForGameReview,
 } from "../controllers/gameReviewControllers";
 
 const gameReviewRoutes = (app) => {
@@ -14,6 +15,8 @@ const gameReviewRoutes = (app) => {
     .get(getSingleGameReview)
     .put(updateGameReview)
     .delete(deleteGameReview);
+
+  app.route("/reviews/search").post(searchForGameReview);
 };
 
 export default gameReviewRoutes;
