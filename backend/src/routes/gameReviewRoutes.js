@@ -7,8 +7,13 @@ import {
   searchForGameReview,
 } from "../controllers/gameReviewControllers";
 
+import { loginRequired } from "../controllers/userControllers";
+
 const gameReviewRoutes = (app) => {
-  app.route("/reviews").get(getGameReviews).post(addNewGameReview);
+  app
+    .route("/reviews")
+    .get(getGameReviews)
+    .post(loginRequired, addNewGameReview);
 
   app
     .route("/reviews/:reviewTitle")

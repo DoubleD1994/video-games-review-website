@@ -8,18 +8,18 @@ export const addNewGameReview = (req, res) => {
 
   newGameReview.save((err, gameReview) => {
     if (err) {
-      res.send({ success: "false", err });
+      res.status(400).json({ success: "false", err });
     }
-    res.json({ success: true, review: gameReview });
+    res.status(201).json({ success: true, review: gameReview });
   });
 };
 
 export const getGameReviews = (req, res) => {
   GameReview.find({}, (err, gameReviews) => {
     if (err) {
-      res.send({ success: "false", err });
+      res.status(400).json({ success: "false", err });
     }
-    res.json(gameReviews);
+    res.status(200).json(gameReviews);
   });
 };
 
@@ -28,9 +28,11 @@ export const getSingleGameReview = (req, res) => {
     { reviewTitle: req.params.reviewTitle },
     (err, gameReview) => {
       if (err) {
-        res.send({ success: "false", err });
+        res
+          .status(404)
+          .json({ success: "false", message: "Game review not found." });
       }
-      res.json(gameReview);
+      res.status(200).json(gameReview);
     }
   );
 };
@@ -42,9 +44,9 @@ export const updateGameReview = (req, res) => {
     { new: true },
     (err, gameReview) => {
       if (err) {
-        res.send({ success: "false", err });
+        res.status(400).json({ success: "false", err });
       }
-      res.json({ success: true, review: gameReview });
+      res.status(202).json({ success: true, review: gameReview });
     }
   );
 };
@@ -54,9 +56,9 @@ export const deleteGameReview = (req, res) => {
     { reviewTitle: req.params.reviewTitle },
     (err, gameReview) => {
       if (err) {
-        res.send({ success: "false", err });
+        res.status(400).json({ success: "false", err });
       }
-      res.json({
+      res.status(202).json({
         success: true,
         message: "Game review successfully deleted",
       });
@@ -76,9 +78,9 @@ export const searchForGameReview = (req, res) => {
     },
     (err, gameReview) => {
       if (err) {
-        res.send({ success: "false", err });
+        res.status(400).json({ success: "false", err });
       }
-      res.json({
+      res.status(200).json({
         success: "true",
         gameReview,
       });
