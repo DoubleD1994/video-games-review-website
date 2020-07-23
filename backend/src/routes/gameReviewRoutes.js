@@ -5,6 +5,7 @@ import {
   updateGameReview,
   deleteGameReview,
   searchForGameReview,
+  authoriseUserIsAuthorOfReview,
 } from "../controllers/gameReviewControllers";
 
 import { loginRequired } from "../controllers/userControllers";
@@ -18,8 +19,8 @@ const gameReviewRoutes = (app) => {
   app
     .route("/reviews/:reviewTitle")
     .get(getSingleGameReview)
-    .put(updateGameReview)
-    .delete(deleteGameReview);
+    .put(loginRequired, authoriseUserIsAuthorOfReview, updateGameReview)
+    .delete(loginRequired, authoriseUserIsAuthorOfReview, deleteGameReview);
 
   app.route("/reviews/search").post(searchForGameReview);
 };

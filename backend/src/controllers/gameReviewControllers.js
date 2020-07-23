@@ -5,7 +5,7 @@ const GameReview = mongoose.model("GameReview", GameReviewSchema);
 
 export const addNewGameReview = (req, res) => {
   const newGameReview = new GameReview(req.body);
-
+  newGameReview.author = req.user.username;
   newGameReview.save((err, gameReview) => {
     if (err) {
       res.status(400).json({ success: "false", err });
@@ -44,7 +44,10 @@ export const updateGameReview = (req, res) => {
     { new: true },
     (err, gameReview) => {
       if (err) {
-        res.status(400).json({ success: "false", err });
+        res.status(400).json({
+          success: "false",
+          message: "There was an error when updating the game.",
+        });
       }
       res.status(202).json({ success: true, review: gameReview });
     }
@@ -62,6 +65,27 @@ export const deleteGameReview = (req, res) => {
         success: true,
         message: "Game review successfully deleted",
       });
+    }
+  );
+};
+
+export const authoriseUserIsAuthorOfReview = (req, res, next) => {
+  GameReview.find(
+    { reviewTitle: req.params.reviewTitle },
+    (err, gameReview) => {
+      if (err) {
+        res
+          .status(404)
+          .json({ success: "false", message: "Game review not found." });
+      }
+      if (req.user.username === gameReview[0].author) {
+        next();
+      } else {
+        return res.status(403).json({
+          success: "false",
+          message: "User forbidden from editting review.",
+        });
+      }
     }
   );
 };

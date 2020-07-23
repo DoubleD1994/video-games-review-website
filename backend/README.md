@@ -22,7 +22,7 @@ These are the routes:
 - http://localhost:3000/register - (POST) - register a new user
 - http://localhost:3000/login - (POST) - authorise a user
 - http://localhost:3000/reviews - (GET, POST) - get and create game reviews (user must be authorised to create a review)
-- http://localhost:3000/reviews/:reviewTitle - (GET, PUT, DELETE) - get, update and delete a game review
+- http://localhost:3000/reviews/:reviewTitle - (GET, PUT, DELETE) - get, update and delete a game review (user must be the author to edit/delete a review)
 - http://localhost:3000/reviews/search - (POST) - search for a game based on the author, reviewTitle, gameTitle or gameCategory
 
 A mongo database is being used to store the data. It has the following collections:
