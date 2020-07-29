@@ -4,7 +4,7 @@
   "description": "The backend for a website allowing people to submit video games reviews",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -- --recursive",
+    "test": "mocha -- --recursive --require babel-core/register",
     "coverage": "cross-env DEBUG=backend:* nyc --reporter=text --reporter =html mocha -- --recursive",
     "start": "nodemon ./index.js --exec babel-node -e js",
     "eslint": "eslint"
@@ -23,13 +23,6 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1",
-    "chai": "^4.2.0",
-    "chai-http": "^4.3.0",
-    "eslint": "^7.4.0",
-    "mocha": "^8.0.1",
-    "nyc": "^15.1.0",
-    "proxyquire": "^2.1.3",
-    "sinon": "^9.0.2",
-    "sinon-chai": "^3.5.0"
+    "eslint": "^7.4.0"
   }
 }
