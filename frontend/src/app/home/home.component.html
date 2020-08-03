@@ -1,2 +1,16 @@
 <search></search>
-<mat-card>Simple card</mat-card>
+<div *ngFor="let review of webService.reviews | async">
+  <mat-card class="card">
+    <mat-card-title
+      [routerLink]="['/reviews', review.reviewTitle]"
+      style="cursor: pointer;"
+      >{{ review.reviewTitle }}</mat-card-title
+    >
+    <hr />
+    <mat-card-content>
+      Author: {{ review.author }} Title: {{ review.gameTitle }} Create Date:{{
+        review.created_date
+      }}
+    </mat-card-content>
+  </mat-card>
+</div>
