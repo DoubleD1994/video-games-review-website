@@ -1,20 +1,3 @@
-mat-grid-list {
-  background: rgb(0, 194, 0);
-  margin-top: 2px;
-  margin-bottom: 2px;
-}
-
-::ng-deep .mat-focused .mat-form-field-label {
-  /*change color of label*/
-  color: blueviolet !important;
-}
-
-::ng-deep.mat-form-field-underline {
-  /*change color of underline*/
-  background-color: blueviolet !important;
-}
-
-::ng-deep.mat-form-field-ripple {
-  /*change color of underline when focused*/
-  background-color: blueviolet !important;
+mat-card {
+  margin: 1px;
 }
