@@ -7,6 +7,22 @@ const User = mongoose.model("User", UserSchema);
 
 export const loginRequired = (req, res, next) => {
   if (req.user) {
+    if (!req.header("authorization")) {
+      return res.status(401).send({
+        message: "Unauthorized Request. Missing authentication header",
+      });
+    }
+
+    const token = req.header("authorization").split(" ")[1];
+
+    const payload = jwt.decode(token, "VIDEOGAMESITEAPIs");
+
+    if (!payload)
+      return res.status(401).send({
+        message: "Unauthorized Request. Authentication header invalid",
+      });
+
+    req.user = payload;
     next();
   } else {
     return res.status(401).json({ message: "Unauthorized user!" });
@@ -21,7 +37,14 @@ export const register = (req, res) => {
       return res.status(400).send({ message: err });
     } else {
       user.hashPassword = undefined;
-      return res.json(user);
+      return res.json({
+        user,
+        token: jwt.sign(
+          { email: user.email, username: user.username, _id: user.id },
+          "VIDEOGAMESITEAPIs"
+        ),
+        username: user.username,
+      });
     }
   });
 };
@@ -29,7 +52,7 @@ export const register = (req, res) => {
 export const login = (req, res) => {
   User.findOne(
     {
-      email: req.body.email,
+      username: req.body.username,
     },
     (err, user) => {
       if (err) throw err;
@@ -48,6 +71,7 @@ export const login = (req, res) => {
               { email: user.email, username: user.username, _id: user.id },
               "VIDEOGAMESITEAPIs"
             ),
+            username: user.username,
           });
         }
       }

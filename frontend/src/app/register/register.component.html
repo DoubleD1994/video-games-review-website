@@ -1,15 +1,53 @@
 <mat-card>
-  <mat-form-field>
-    <input matInput placeholder="username" />
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="email" />
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="password" type="password" />
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="confirm password" type="password" />
-  </mat-form-field>
-  <button mat-raised-button color="primary">Register</button>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <input
+        [ngClass]="{ error: isValid('username') }"
+        matInput
+        placeholder="username"
+        formControlName="username"
+      />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <input
+        [ngClass]="{ error: isValid('email') }"
+        matInput
+        placeholder="email"
+        type="email"
+        formControlName="email"
+      />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <input
+        [ngClass]="{ error: isValid('password') }"
+        matInput
+        placeholder="password"
+        type="password"
+        formControlName="password"
+      />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <input
+        [ngClass]="{ error: isValid('confirmPassword') }"
+        matInput
+        placeholder="confirm password"
+        type="password"
+        formControlName="confirmPassword"
+      />
+    </mat-form-field>
+    <br />
+    <span *ngIf="form.errors?.mismatchedFields">Passwords do not match</span>
+    <span *ngIf="isValid('email')">Email not valid</span>
+    <br />
+    <button
+      *ngIf="!form.errors?.mismatchedFields && !isValid('email')"
+      mat-raised-button
+      color="primary"
+    >
+      Register
+    </button>
+  </form>
 </mat-card>

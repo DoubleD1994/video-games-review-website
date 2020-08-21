@@ -10,6 +10,9 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { WebService } from './web.service';
+import { ViewReviewComponent } from './reviews/view-review.component';
+import { WriteReviewComponent } from './reviews/write-review.component';
+import { AuthService } from './auth.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,10 +24,17 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { MatGridListModule } from '@angular/material/grid-list';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 var routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'reviews/:reviewTitle', component: ViewReviewComponent },
+  {
+    path: 'write-review',
+    component: WriteReviewComponent,
+  },
 ];
 
 @NgModule({
@@ -35,6 +45,8 @@ var routes = [
     HomeComponent,
     LoginComponent,
     RegisterComponent,
+    ViewReviewComponent,
+    WriteReviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,9 +60,11 @@ var routes = [
     MatToolbarModule,
     HttpClientModule,
     MatGridListModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes),
   ],
-  providers: [WebService],
+  providers: [WebService, AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

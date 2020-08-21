@@ -1,9 +1,19 @@
 <mat-toolbar color="primary">
   <button mat-button routerLink="/">Video Game Reviews</button>
-  <button mat-button routerLink="/">How To Use</button>
+  <button *ngIf="auth.isAuthenticated" mat-button routerLink="/write-review">
+    Write Review
+  </button>
   <span style="flex: 1 1 auto;"></span>
-  <button mat-button routerLink="/login">Login</button>
-  <button mat-button routerLink="/register">
+  <button *ngIf="!auth.isAuthenticated" mat-button routerLink="/login">
+    Login
+  </button>
+  <button *ngIf="!auth.isAuthenticated" mat-button routerLink="/register">
     Register
+  </button>
+  <button *ngIf="auth.isAuthenticated" mat-button routerLink="/user">
+    Welcome {{ auth.name }}
+  </button>
+  <button *ngIf="auth.isAuthenticated" mat-button (click)="auth.logout()">
+    Logout
   </button>
 </mat-toolbar>

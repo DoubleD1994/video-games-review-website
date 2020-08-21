@@ -10,6 +10,6 @@ export class HomeComponent {
   constructor(public webService: WebService) {}
 
   ngOnInit() {
-    this.webService.getReviews('');
+    this.webService.getReviews();
   }
 }
