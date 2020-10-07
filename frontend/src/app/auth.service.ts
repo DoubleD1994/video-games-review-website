@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class AuthService {
@@ -8,7 +9,11 @@ export class AuthService {
   NAME_KEY = 'name';
   TOKEN_KEY = 'token';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
 
   get name() {
     return localStorage.getItem(this.NAME_KEY);
@@ -46,6 +51,9 @@ export class AuthService {
   authenticate(res) {
     var authResponse = res;
     if (!(authResponse as any).token) {
+      this.toastr.error((authResponse as any).message, 'Login failed', {
+        timeOut: 5000,
+      });
       return;
     }
     localStorage.setItem(this.TOKEN_KEY, (authResponse as any).token);

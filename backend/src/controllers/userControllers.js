@@ -58,12 +58,12 @@ export const login = (req, res) => {
       if (err) throw err;
       if (!user) {
         res
-          .status(401)
+          .status(200)
           .json({ message: "Authentication failed. No user found." });
       } else if (user) {
         if (!user.comparePassword(req.body.password, user.hashPassword)) {
           res
-            .status(401)
+            .status(200)
             .json({ message: "Authentication failed. Wrong password." });
         } else {
           return res.json({

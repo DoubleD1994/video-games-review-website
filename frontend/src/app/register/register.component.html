@@ -41,9 +41,14 @@
     <br />
     <span *ngIf="form.errors?.mismatchedFields">Passwords do not match</span>
     <span *ngIf="isValid('email')">Email not valid</span>
+    <span *ngIf="isValid('username')">Username not valid</span>
     <br />
     <button
-      *ngIf="!form.errors?.mismatchedFields && !isValid('email')"
+      *ngIf="
+        !form.errors?.mismatchedFields &&
+        !isValid('email') &&
+        !isValid('username')
+      "
       mat-raised-button
       color="primary"
     >

@@ -23,6 +23,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { ToastrModule } from 'ngx-toastr';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -63,6 +64,7 @@ var routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
+    ToastrModule.forRoot({ positionClass: 'inline' }),
   ],
   providers: [WebService, AuthService],
   bootstrap: [AppComponent],
